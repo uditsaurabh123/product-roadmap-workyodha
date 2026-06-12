@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WorkYodha · Roadmap by Phase</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f7;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      line-height: 1.5;
+      color: #1a2c3e;
+    }
+
+    /* main layout */
+    .app {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    /* header */
+    .header {
+      background: #0f2e2c;
+      color: white;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .header p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 0.3rem;
+    }
+
+    /* navigation tabs */
+    .nav-tabs {
+      background: white;
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #dce5ea;
+      padding: 0 1.5rem;
+      gap: 0.25rem;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #4a627a;
+      cursor: pointer;
+      transition: 0.2s;
+      border-bottom: 3px solid transparent;
+    }
+    .tab-btn:hover {
+      color: #1c6e6b;
+      background: #f4f9fc;
+    }
+    .tab-btn.active {
+      color: #1c6e6b;
+      border-bottom-color: #2c9b8f;
+    }
+
+    /* content area */
+    .content {
+      flex: 1;
+      padding: 2rem 1.8rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page {
+      display: none;
+      animation: fade 0.2s ease;
+    }
+    .page.active-page {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(6px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* cards */
+    .card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.03);
+      border: 1px solid #e2edf2;
+    }
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #0f2e2c;
+      border-left: 5px solid #2c9b8f;
+      padding-left: 1rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 1.2rem 0 0.6rem 0;
+      color: #1f5e5a;
+    }
+    .badge {
+      display: inline-block;
+      background: #eef2f5;
+      border-radius: 40px;
+      padding: 0.2rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #2c6e6b;
+      margin-right: 0.6rem;
+      margin-bottom: 0.4rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 0.8rem 0;
+    }
+    th {
+      background: #f0f6f9;
+      text-align: left;
+      padding: 0.7rem;
+      font-weight: 600;
+    }
+    td {
+      padding: 0.7rem;
+      border-bottom: 1px solid #e2edf2;
+      vertical-align: top;
+    }
+    .code-block {
+      background: #1e2a32;
+      color: #e2f0f5;
+      padding: 0.8rem 1rem;
+      border-radius: 0.8rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      margin: 0.8rem 0;
+    }
+    .btn-download {
+      background: #1c6e6b;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: #6c86a0;
+      border-top: 1px solid #dce7ec;
+      margin-top: 1rem;
+    }
+    @media (max-width: 700px) {
+      .content { padding: 1rem; }
+      .tab-btn { padding: 0.6rem 1rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>🚀 WorkYodha · Execution Infrastructure</h1>
+    <p>Full incubation with IIT Ropar (TBIF, iHub-AWaDH) — Phase‑by‑phase roadmap, user stories, implementation guides & RICE</p>
+  </div>
+  <div class="nav-tabs" id="tabContainer">
+    <button class="tab-btn active" data-page="overview">📌 Overview & Strategy</button>
+    <button class="tab-btn" data-page="mvp">🧪 Phase 1: MVP (Core Loop)</button>
+    <button class="tab-btn" data-page="phase2">🔐 Phase 2: Review & Governance</button>
+    <button class="tab-btn" data-page="phase3">🧠 Phase 3: AI & Intelligence</button>
+    <button class="tab-btn" data-page="phase4">📱 Phase 4: Enterprise & Scale</button>
+    <button class="tab-btn" data-page="micro">⚡ Micro‑launches (1-15)</button>
+  </div>
+
+  <div class="content">
+    <!-- ========= OVERVIEW PAGE ========= -->
+    <div id="overview" class="page active-page">
+      <div class="card">
+        <h2>✨ Vision (3–5 years)</h2>
+        <p>Global standard for AI‑powered execution infrastructure. WorkYodha bridges training → verified completion, with AI guiding employees, flagging risk, and providing auditable proof.</p>
+      </div>
+      <div class="card">
+        <h2>📊 Strategy (DIBB)</h2>
+        <p><strong>Data:</strong> 70% failures due to unclear instructions; managers chase proof 30% time.<br>
+        <strong>Insights:</strong> Existing tools track activity, not execution quality.<br>
+        <strong>Beliefs:</strong> guided playbooks + evidence + review gates + AI wins.<br>
+        <strong>Bets:</strong> MVP → review gate → AI → enterprise. India first, then global.</p>
+      </div>
+      <div class="card">
+        <h2>📈 12‑Month Success Metrics</h2>
+        <table><thead><tr><th>Metric</th><th>Target</th></tr></thead>
+        <tbody><tr><td>Creation → approved completion</td><td>&lt;2 days</td></tr>
+        <tr><td>Review cycle (submit→decision)</td><td>&lt;0.5 day</td></tr>
+        <tr><td>Work with evidence attached</td><td>≥80%</td></tr>
+        <tr><td>Pilot CSAT</td><td>≥4.0</td></tr>
+        <tr><td>Overdue work rate</td><td>&lt;15%</td></tr></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h2>🤝 Key Stakeholders (Incubation)</h2>
+        <div><span class="badge">IIT Ropar</span><span class="badge">TBIF</span><span class="badge">iHub‑AWaDH</span><span class="badge">Annam.ai</span><span class="badge">Faculty mentors</span><span class="badge">VCs / Angel network</span><span class="badge">DST / MeitY</span></div>
+      </div>
+      <div class="card">
+        <h2>🎯 RICE Top Priorities</h2>
+        <table><thead><tr><th>Task</th><th>RICE</th><th>Priority</th></tr></thead>
+        <tbody><tr><td>Login</td><td>80</td><td>P0</td></tr><tr><td>Dashboard refresh</td><td>64</td><td>P0</td></tr>
+        <tr><td>Create work</td><td>50</td><td>P0</td></tr><tr><td>Status change</td><td>50.4</td><td>P0</td></tr>
+        <tr><td>Complete step</td><td>48.6</td><td>P0</td></tr>
+        <tr><td>Rejection templates</td><td>15.75</td><td>P0 (Phase2)</td></tr>
+        <tr><td>Reviewer queue</td><td>12.6</td><td>P0</td></tr>
+        <tr><td>Rework loop</td><td>11.5</td><td>P0</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========= PHASE 1: MVP ========= -->
+    <div id="mvp" class="page">
+      <div class="card">
+        <h2>🧪 Phase 1: Core Execution Loop (MVP)</h2>
+        <p><strong>Duration:</strong> 7 weeks | <strong>Goal:</strong> Prove that users can create work, follow playbooks, attach proof, and mark done.<br>
+        <strong>Success metric:</strong> Pilot completes work from creation → done in &lt;2 days.</p>
+      </div>
+      <div class="card">
+        <h3>📋 User Stories & Implementation Details</h3>
+        <table>
+          <thead><tr><th>Story ID</th><th>Description</th><th>Acceptance Criteria</th><th>Implementation notes</th><th>Effort (d)</th></tr></thead>
+          <tbody>
+            <tr><td>ID‑01</td><td>Signup with email + workspace</td><td>Verification email, after confirm → dashboard</td><td>Use JWT + Node.js; sendgrid for emails</td><td>2</td></tr>
+            <tr><td>ID‑02</td><td>Login / Forgot password</td><td>Redirect to dashboard, reset flow</td><td>bcrypt, rate‑limiting on reset</td><td>1</td></tr>
+            <tr><td>WC‑01</td><td>Create work (title, owner, due, priority)</td><td>Work appears in owner’s list</td><td>REST POST /works; owner dropdown from workspace members</td><td>2</td></tr>
+            <tr><td>PE‑01</td><td>Add step to playbook</td><td>Steps reorderable, display in order</td><td>Drag‑and‑drop (SortableJS), store order index</td><td>2.5</td></tr>
+            <tr><td>PE‑02</td><td>Mark step as complete</td><td>Checkbox toggles, saved timestamp</td><td>PATCH /steps/:id/complete</td><td>1.5</td></tr>
+            <tr><td>EV‑01</td><td>Upload file/image/note</td><td>Max 10MB, preview image, list evidence</td><td>Multer (Node), S3 or local storage; virus scan optional</td><td>2</td></tr>
+            <tr><td>SC‑01</td><td>Change status (To do → In progress → Done)</td><td>Status updates visible on dashboard</td><td>State machine; emit socket event for real‑time (optional MVP)</td><td>1</td></tr>
+          </tbody>
+        </table>
+        <div class="code-block">
+          // Example API endpoint for work creation (Express)
+          app.post('/api/works', auth, async (req, res) => {
+            const { title, ownerId, dueDate, priority } = req.body;
+            const work = await Work.create({ title, ownerId, dueDate, priority, status: 'todo', workspaceId: req.user.workspaceId });
+            res.json(work);
+          });
+        </div>
+      </div>
+      <div class="card">
+        <h3>🔧 How to implement MVP step‑by‑step</h3>
+        <ol style="margin-left: 1.5rem;">
+          <li>Set up PostgreSQL + Redis (auth sessions).</li>
+          <li>Build auth routes (signup, login, workspace creation).</li>
+          <li>CRUD for works, steps, evidence (REST).</li>
+          <li>Frontend: React + Tailwind (or Vue). Dashboard with “My work”, “All work”.</li>
+          <li>Implement drag‑and‑drop for steps (react-beautiful-dnd).</li>
+          <li>File upload to cloud (AWS S3) with signed URLs.</li>
+          <li>Deploy on Vercel / Render + PostgreSQL (Neon/Tembo).</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ========= PHASE 2: REVIEW & GOVERNANCE ========= -->
+    <div id="phase2" class="page">
+      <div class="card">
+        <h2>🔐 Phase 2: Review & Governance</h2>
+        <p><strong>Duration:</strong> 7 weeks | <strong>Goal:</strong> Add reviewer queue, reject/resubmit, audit trail, SLA reminders.<br>
+        <strong>Success metric:</strong> Review cycle time reduced by 40% (submit → decision).</p>
+      </div>
+      <div class="card">
+        <h3>📋 User Stories & Implementation Notes</h3>
+        <table>
+          <thead><tr><th>Story ID</th><th>User story</th><th>Implementation approach</th><th>Effort (d)</th></tr></thead>
+          <tbody>
+            <tr><td>RQ‑01</td><td>Reviewer sees pending queue</td><td>Add reviewer_role column; filter works where status='pending_review' and reviewer_id matches</td><td>2</td></tr>
+            <tr><td>RQ‑02</td><td>Approve work</td><td>Transition status to 'approved', log audit, send notification</td><td>1</td></tr>
+            <tr><td>RQ‑03</td><td>Reject with reason</td><td>Modal with required text; status='rejected'; store reason in audit_logs</td><td>1.5</td></tr>
+            <tr><td>RL‑01</td><td>Assignee sees rejected items</td><td>New filter "Rework needed" on dashboard; show rejection reason</td><td>2</td></tr>
+            <tr><td>RL‑02</td><td>Resubmit after edits</td><td>Add resubmit button, keep original reviewer, status back to pending_review</td><td>2</td></tr>
+            <tr><td>AT‑01</td><td>Audit trail (basic)</td><td>Database table audit_logs (user, action, timestamp, work_id, details)</td><td>1.5</td></tr>
+            <tr><td>ES‑01</td><td>SLA field & reminder</td><td>Add sla_hours column; cron job sends email at 80% elapsed</td><td>1.5</td></tr>
+            <tr><td>ES‑03</td><td>Blocker flag</td><td>status='blocked', reason column, highlight in dashboard</td><td>1</td></tr>
+          </tbody>
+        </table>
+        <div class="code-block">
+          // Audit trail middleware (example)
+          async function auditLog(workId, userId, action, details) {
+            await db.audit.create({ workId, userId, action, details, createdAt: new Date() });
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- ========= PHASE 3: AI & INTELLIGENCE ========= -->
+    <div id="phase3" class="page">
+      <div class="card">
+        <h2>🧠 Phase 3: AI & Intelligence</h2>
+        <p><strong>Duration:</strong> 7 weeks | <strong>Goal:</strong> Risk scoring, role‑based access, evidence versioning, API.<br>
+        <strong>Success metric:</strong> 15% fewer late escalations; 0 unauthorised approvals.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 Risk scoring (heuristic)</h3>
+        <p>Compute score = (overdue? 30pt) + (rejection_count * 15pt) + (low_evidence? 20pt). Score >70 → high risk badge.</p>
+        <div class="code-block">
+          function computeRisk(work) {
+            let score = 0;
+            if (work.dueDate < new Date()) score += 30;
+            score += (work.rejectionCount || 0) * 15;
+            if ((work.evidenceCount || 0) < 2) score += 20;
+            return Math.min(score, 100);
+          }
+        </div>
+        <h3>👥 Roles implementation</h3>
+        <p>Add `role` column (admin, reviewer, member). Middleware checks permissions: only reviewers see approve/reject buttons. Admin can assign roles via workspace settings.</p>
+        <h3>📂 Evidence versioning & restore</h3>
+        <p>Soft delete (deleted_at), keep history table evidence_versions. Restore reverts deleted_at = null.</p>
+      </div>
+      <div class="card">
+        <h3>🔌 Read‑only API</h3>
+        <p>Generate API keys (uuid). Endpoint: <code>GET /api/v1/works?limit=50</code> returns JSON. Rate limiting (1000/hour).</p>
+      </div>
+    </div>
+
+    <!-- ========= PHASE 4: ENTERPRISE & SCALE ========= -->
+    <div id="phase4" class="page">
+      <div class="card">
+        <h2>📱 Phase 4: Enterprise & Scale</h2>
+        <p><strong>Duration:</strong> 7 weeks | <strong>Goal:</strong> Mobile offline, bulk export, Slack integration, SOC2 readiness.<br>
+        <strong>Success metric:</strong> First paid enterprise contract with multi‑year term.</p>
+      </div>
+      <div class="card">
+        <h3>📲 Mobile offline steps</h3>
+        <p>Use Service Worker + IndexedDB to cache playbook steps. User can toggle step completion offline; sync when back online.</p>
+        <h3>📦 Bulk evidence export</h3>
+        <p>Select work items → generate ZIP with all files + PDF summary (audit trail). Use archiver (Node) + PDFKit.</p>
+        <h3>🔔 Slack webhook</h3>
+        <p>On approve/reject, POST to Slack incoming webhook with work title, reviewer, link.</p>
+        <h3>🛡️ SOC2 preparation</h3>
+        <p>Implement audit logs retention, access control reviews, and vulnerability scans. Use Vanta / Drata automation.</p>
+      </div>
+    </div>
+
+    <!-- ========= MICRO LAUNCHES PAGE ========= -->
+    <div id="micro" class="page">
+      <div class="card">
+        <h2>💥 15 Small Launches – Immediate Impact</h2>
+        <p>Each micro‑launch takes 1–5 days and delivers measurable value to a specific user.</p>
+        <table>
+          <thead><tr><th>#</th><th>Launch</th><th>Impact</th><th>Effort</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Assign work</td><td>No lost tasks</td><td>3d</td></tr>
+            <tr><td>2</td><td>Clear steps</td><td>50% fewer interruptions</td><td>3d</td></tr>
+            <tr><td>3</td><td>Upload proof</td><td>70% less chasing</td><td>4d</td></tr>
+            <tr><td>4</td><td>Status done</td><td>Real‑time visibility</td><td>2d</td></tr>
+            <tr><td>5</td><td>Reviewer queue</td><td>Saves 30 min/day</td><td>3d</td></tr>
+            <tr><td>6</td><td>Reject with reason</td><td>Clear rework</td><td>2d</td></tr>
+            <tr><td>7</td><td>Resubmit</td><td>Saves hours</td><td>3d</td></tr>
+            <tr><td>8</td><td>Audit trail</td><td>No more blame</td><td>2d</td></tr>
+            <tr><td>9</td><td>SLA reminder</td><td>30% less overdue</td><td>2d</td></tr>
+            <tr><td>10</td><td>Blocker flag</td><td>Hours faster resolution</td><td>2d</td></tr>
+            <tr><td>11</td><td>Risk flag</td><td>Proactive intervention</td><td>3d</td></tr>
+            <tr><td>12</td><td>Roles</td><td>Compliance trust</td><td>3d</td></tr>
+            <tr><td>13</td><td>Export for audit</td><td>Days → minutes</td><td>3d</td></tr>
+            <tr><td>14</td><td>Mobile offline</td><td>Enables remote work</td><td>5d</td></tr>
+            <tr><td>15</td><td>Slack notify</td><td>Less context switching</td><td>2d</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Cumulative effort:</strong> ~40 days (8 weeks) with 2 developers. Every launch is independently shippable.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    WorkYodha · IIT Ropar incubation · Full roadmap with implementation details · Use tabs to explore phases<br>
+    <button class="btn-download" id="downloadFullHtml">📥 Download this project as .html (self‑contained)</button>
+  </footer>
+</div>
+
+<script>
+  // Tab switching logic
+  const pages = document.querySelectorAll('.page');
+  const buttons = document.querySelectorAll('.tab-btn');
+  
+  function switchPage(pageId) {
+    pages.forEach(page => {
+      page.classList.remove('active-page');
+      if (page.id === pageId) page.classList.add('active-page');
+    });
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.getAttribute('data-page') === pageId) btn.classList.add('active');
+    });
+    // scroll to top on page change
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const pageId = btn.getAttribute('data-page');
+      switchPage(pageId);
+    });
+  });
+
+  // Optional: handle anchor links
+  if (window.location.hash) {
+    const hashPage = window.location.hash.substring(1);
+    if (document.getElementById(hashPage)) switchPage(hashPage);
+  }
+
+  // Download full HTML (the current file)
+  document.getElementById('downloadFullHtml').addEventListener('click', () => {
+    const htmlContent = document.documentElement.outerHTML;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'workyodha_roadmap_project.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+</script>
+</body>
+</html>
